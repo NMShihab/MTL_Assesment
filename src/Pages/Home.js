@@ -9,6 +9,7 @@ const Home = () => {
   const [filterCategory, setFilterCategory] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [searchString, setSearchString] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchProduct = async () => {
     try {
@@ -21,6 +22,7 @@ const Home = () => {
         const catArray = [];
         categories.forEach((cat) => catArray.push(cat));
         setCategory(catArray);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -28,6 +30,13 @@ const Home = () => {
   };
 
   const filterData = (data, filterCategory, sortBy, searchString) => {
+    if (
+      searchString.length === 0 &&
+      sortBy.length === 0 &&
+      filterCategory.length === 0
+    ) {
+      return data.sort((a, b) => a.id - b.id);
+    }
     let fdata = data;
     if (filterCategory) {
       fdata = fdata.filter((d) => d.category === filterCategory);
@@ -45,19 +54,8 @@ const Home = () => {
       );
     }
 
-    if (
-      searchString.length === 0 &&
-      sortBy.length === 0 &&
-      filterCategory === 0
-    ) {
-      fdata = data;
-    }
-
     return fdata;
   };
-
-  const allData = filterData(data, filterCategory, sortBy, searchString);
-  console.log({ allData });
 
   useEffect(() => {
     fetchProduct();
@@ -66,10 +64,13 @@ const Home = () => {
   return (
     <div>
       <Container>
-        <div className="text-center">PRODUCTS</div>
+        <div className="text-center">
+          {" "}
+          <h1>PRODUCTS</h1>
+        </div>
         <div className="m-3">
           <form className="d-flex justify-content-around">
-            <div class="form-group">
+            <div className="form-group">
               <select
                 class="form-control"
                 id="exampleFormControlSelect2"
@@ -83,9 +84,9 @@ const Home = () => {
                 ))}
               </select>
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <select
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlSelect2"
                 onChange={(e) => setSortBy(e.target.value)}
               >
@@ -94,7 +95,7 @@ const Home = () => {
                 <option value="Price">Price</option>
               </select>
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
                 className="form-control"
                 placeholder="Search by name"
@@ -104,11 +105,12 @@ const Home = () => {
           </form>
         </div>
         <Row>
-          {allData.map((d) => (
-            <Col key={d.id} md={4} xl={3} className="mb-2">
-              <ProductCard product={d} />
-            </Col>
-          ))}
+          {!loading &&
+            filterData(data, filterCategory, sortBy, searchString).map((d) => (
+              <Col key={d.id} md={4} xl={3} className="mb-2">
+                <ProductCard product={d} />
+              </Col>
+            ))}
         </Row>
       </Container>
     </div>
