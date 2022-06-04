@@ -9,6 +9,16 @@
       "email": "nmshihabislam@gmail.com",
       "password": "$2a$10$joGXt52O/268NQhUE6LRMOHgC3mqqB0i4Rc4jzT.dklMg3NRrkgey",
       "id": 2
+    },
+    {
+      "email": "abcd@gmail.com",
+      "password": "$2a$10$0LBh0uTs7sz1JHD.Fr1VzOW5bQQ45ORGTrO6bESn8tnoAZoHxGyNm",
+      "id": 3
+    },
+    {
+      "email": "abcde@gmail.com",
+      "password": "$2a$10$xJ4xqwKHSzYKtntw4vlr2e.8HM4EQqxQQiq7BuVm9s60grS8bQ9QS",
+      "id": 4
     }
   ],
   "products": [

@@ -12,12 +12,15 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isDisable, setIsDisable] = useState(true);
+
+  const navigate = useNavigate();
 
   const confirmPasswordHandler = (e) => {
     setConfirmPassword(e.target.value);
@@ -32,6 +35,11 @@ const Registration = () => {
     const data = { email, password };
     try {
       const response = await axios.post("http://localhost:4000/register", data);
+
+      if (response.status === 201) {
+        navigate("/login");
+      }
+
       console.log(response);
     } catch (error) {
       console.log(error);

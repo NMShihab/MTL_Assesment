@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Container, Card, CardImg, Button } from "reactstrap";
-import { useLocation } from "react-router-dom";
 import { useParams } from "react-router";
 import axios from "axios";
 
 const ProductDetail = (props) => {
   const [data, setData] = useState({});
-  const location = useLocation();
+
   const params = useParams();
 
   const fetchProductDetails = async (id) => {

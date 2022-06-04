@@ -13,10 +13,16 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,6 +35,14 @@ const Login = () => {
       if (response.status === 200) {
         const token = response.data.accessToken;
         const decoded = jwt_decode(token);
+        dispatch(
+          login({
+            email: email,
+          })
+        );
+        localStorage.setItem("user_token", token);
+        localStorage.setItem("user", email);
+        navigate("/");
         console.log({ decoded });
       }
     } catch (error) {
