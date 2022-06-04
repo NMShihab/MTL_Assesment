@@ -4,6 +4,11 @@
       "email": "momit@test.com",
       "password": "$2a$10$ld9.oug8WB/y08NdpaJyAu/bq3pMKJwi0kYDv7FAfyhcw0k.PeBee",
       "id": 1
+    },
+    {
+      "email": "nmshihabislam@gmail.com",
+      "password": "$2a$10$joGXt52O/268NQhUE6LRMOHgC3mqqB0i4Rc4jzT.dklMg3NRrkgey",
+      "id": 2
     }
   ],
   "products": [
